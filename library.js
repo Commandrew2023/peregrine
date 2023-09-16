@@ -850,5 +850,5 @@ var Program = {
   }
 
 };
-Program.__addEvents();
-Program.frameRate(60);
+//Program.__addEvents();
+//Program.frameRate(60);
