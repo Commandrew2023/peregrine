@@ -615,7 +615,6 @@ var Graphics = (function () {
 
   return obj;
 })();
-var g = new Graphics(c);
 
 var Game = {
   "__context" : this,
