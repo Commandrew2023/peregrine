@@ -1,271 +1,271 @@
 const Tools = {
 
-		// ANIMATION-ORIENTATED
-		constrain : function (v, min, max) {
-			if (v < min) {
-				v = min;
-			} else if (v > max) {
-				v = max;
-			}
-			return v;
-		},
-		lerp : function (a, b, alpha) {
-			return a + alpha * (b - a);
-		},
-		dist : function (x1, y1, x2, y2) {
-			return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-		},
-
-		// GAME-MAKING
-		random : function (min, max) {
-			return (Math.random() * Math.abs(max - min)) + min;
-		},
-		min : function (list) {
-			var cmin = list[0] || -Infinity;
-			var l = list.length;
-			for (var i = 0; i < l; i++) {
-				var v = list[i];
-				cmin = (v < cmin ? v : cmin);
-			}
-			return cmin;
-		},
-		max : function (list) {
-			var cmax = list[0] || Infinity;
-			var l = list.length;
-			for (var i = 0; i < l; i++) {
-				var v = list[i];
-				cmax = (v > cmax ? v : cmax);
-			}
-			return cmax;
-		},
-		average : function (list) {
-			var total = 0;
-			var l = list.length;
-			for (var i = 0; i < l; i++) {
-				total += list[i];
-			}
-			return total / l;
-		},
-		sum : function (list) {
-			var total = 0;
-			var l = list.length;
-			for (var i = 0; i < l; i++) {
-				total += list[i];
-			}
-			return total;
-		},
-
-		// HANDLING FLOATING POINTS
-		floor : function (v) {
-			return Math.floor(v);
-		},
-		round : function (v, a = 1) {
-			return Math.round(v * a) / a;
-		},
-		ceil : function (v) {
-			return Math.ceil(v);
-		},
-
-		// EXPONENTIALS
-		log : function (v, b) {
-			return Math.log(v, b);
-		},
-		sqrt : function (v) {
-			return Math.sqrt(v);
-		},
-		nrt : function (n, v) {
-			return Math.pow(v, 1/n);
-		},
-		sq : function (v) {
-			return Math.pow(v, 2);
-		},
-		pow : function (v, e) {
-			return Math.pow(v, e);
-		},
-
-		// TRIGONOMETRY
-		sin : function (deg) {
-			return Math.sin(deg * Math.PI / 180);
-		},
-		cos : function (deg) {
-			return Math.cos(deg * Math.PI / 180);
-		},
-		tan : function (deg) {
-			return Math.tan(deg * Math.PI / 180);
-		},
-		asin : function (v) {
-			return Math.asin(v) * 180 / Math.PI;
-		},
-		acos : function (v) {
-			return Math.acos(v) * 180 / Math.PI;
-		},
-		atan : function (v) {
-			return Math.atan(v) * 180 / Math.PI;
-		},
-		atan2 : function (dy, dx) {
-			return Math.atan2(dy, dx) * 180 / Math.PI;
-		},
-
-
-		// TIME
-		day : function () {
-			return (new Date()).getDate();
-		},
-		dayPadded : function () {
-			if (this.day() < 10) {
-				return "0" + this.day();
-			} else {
-				return this.day().toString();
-			}
-		},
-		month : function () {
-			return (new Date()).getMonth() + 1;
-		},
-		monthPadded : function () {
-			if (this.month() < 10) {
-				return "0" + this.month();
-			} else {
-				return this.month().toString();
-			}
-		},
-		year : function () {
-			return (new Date()).getFullYear();
-		},
-		dayName : function () {
-			return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][(new Date()).getDay()];
-		},
-		monthName : function () {
-			return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][(new Date()).getMonth()];
-		},
-		isLeap : function () {
-			return (new Date()).getFullYear() % 4 === 0;
-		},
-		millis : function () {
-			return (new Date()).getMilliseconds();
-		},
-		millisPadded : function () {
-			if (this.millis() < 10) {
-				return "000" + this.millis();
-			} else if (this.millis() < 100) {
-				return "00" + this.millis();
-			} else if (this.millis() < 1000) {
-				return "0" + this.millis();
-			} else {
-				return this.millis().toString();
-			}
-		},
-		seconds : function () {
-			return (new Date()).getSeconds();
-		},
-		secondsPadded : function () {
-			if (this.seconds() < 10) {
-				return "0" + this.seconds();
-			} else {
-				return this.seconds().toString();
-			}
-		},
-		minutes : function () {
-			return (new Date()).getMinutes();
-		},
-		minutesPadded : function () {
-			if (this.minutes() < 10) {
-				return "0" + this.minutes();
-			} else {
-				return this.minutes().toString();
-			}
-		},
-		hours : function () {
-			return (new Date()).getHours() % 12;
-		},
-		hoursPadded : function () {
-			if (this.hours() < 10) {
-				return "0" + this.hours();
-			} else {
-				return this.hours().toString();
-			}
-		},
-
-		// TECHNICAL STUFF
-		ods : function (object, key, depthLimit=16) {
-			// Object-Deep-Search-(Query)
-
-			var depth = 0;
-			function recur (object, key) {
-				depth++;
-				if (depth > depthLimit) {
-					return undefined;
-				}
-				var keys = Object.keys(object);
-				var l = keys.length;
-				for (var i = 0; i < l; i++) {
-					if (keys[i] !== key) {
-						var next = recur(
-							object[keys[i]], 
-							key
-						);
-						if (next !== undefined) {
-							return next;
-						}
-					} else {
-						return object[
-							keys[i]
-						];
-					}
-				}
-				return undefined;
-			}
-
-			var result = recur(object, key);
-			return result;
-		},
-		odsPath : function (object, key, depthLimit=16) {
-			// Object-Deep-Search-(Query)-PATH
-
-			var depth = 0;
-			var address = [];
-			function recur (object, key) {
-				depth++;
-				if (depth > depthLimit) {
-					return undefined;
-				}
-				var keys = Object.keys(object);
-				var l = keys.length;
-				for (var i = 0; i < l; i++) {
-					if (keys[i] !== key) {
-						var next = recur(
-							object[keys[i]], 
-							key
-						);
-						address.unshift(keys[i]);
-						if (next !== undefined) {
-							return next;
-						} else {
-							address.pop();
-						}
-
-					} else {
-						address.push(keys[i]);
-						return address;
-					}
-				}
-				return undefined;
-			}
-
-			var result = recur(object, key);
-			return result;
-		},
-		odsPathUse : function (object, path) {
-			var FailKey = "";
-			var l = path.length;
-			for (var i = 0; i < l; i++) {
-				object = object[path[i]];
-				if (object === undefined) {
-					FailKey = path[i];
-				}
-			}
-			return object;
+	// ANIMATION-ORIENTATED
+	constrain : function (v, min, max) {
+		if (v < min) {
+			v = min;
+		} else if (v > max) {
+			v = max;
 		}
+		return v;
+	},
+	lerp : function (a, b, alpha) {
+		return a + alpha * (b - a);
+	},
+	dist : function (x1, y1, x2, y2) {
+		return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+	},
+
+	// GAME-MAKING
+	random : function (min, max) {
+		return (Math.random() * Math.abs(max - min)) + min;
+	},
+	min : function (list) {
+		var cmin = list[0] || -Infinity;
+		var l = list.length;
+		for (var i = 0; i < l; i++) {
+			var v = list[i];
+			cmin = (v < cmin ? v : cmin);
+		}
+		return cmin;
+	},
+	max : function (list) {
+		var cmax = list[0] || Infinity;
+		var l = list.length;
+		for (var i = 0; i < l; i++) {
+			var v = list[i];
+			cmax = (v > cmax ? v : cmax);
+		}
+		return cmax;
+	},
+	average : function (list) {
+		var total = 0;
+		var l = list.length;
+		for (var i = 0; i < l; i++) {
+			total += list[i];
+		}
+		return total / l;
+	},
+	sum : function (list) {
+		var total = 0;
+		var l = list.length;
+		for (var i = 0; i < l; i++) {
+			total += list[i];
+		}
+		return total;
+	},
+
+	// HANDLING FLOATING POINTS
+	floor : function (v) {
+		return Math.floor(v);
+	},
+	round : function (v, a = 1) {
+		return Math.round(v * a) / a;
+	},
+	ceil : function (v) {
+		return Math.ceil(v);
+	},
+
+	// EXPONENTIALS
+	log : function (v, b) {
+		return Math.log(v, b);
+	},
+	sqrt : function (v) {
+		return Math.sqrt(v);
+	},
+	nrt : function (n, v) {
+		return Math.pow(v, 1/n);
+	},
+	sq : function (v) {
+		return Math.pow(v, 2);
+	},
+	pow : function (v, e) {
+		return Math.pow(v, e);
+	},
+
+	// TRIGONOMETRY
+	sin : function (deg) {
+		return Math.sin(deg * Math.PI / 180);
+	},
+	cos : function (deg) {
+		return Math.cos(deg * Math.PI / 180);
+	},
+	tan : function (deg) {
+		return Math.tan(deg * Math.PI / 180);
+	},
+	asin : function (v) {
+		return Math.asin(v) * 180 / Math.PI;
+	},
+	acos : function (v) {
+		return Math.acos(v) * 180 / Math.PI;
+	},
+	atan : function (v) {
+		return Math.atan(v) * 180 / Math.PI;
+	},
+	atan2 : function (dy, dx) {
+		return Math.atan2(dy, dx) * 180 / Math.PI;
+	},
+
+
+	// TIME
+	day : function () {
+		return (new Date()).getDate();
+	},
+	dayPadded : function () {
+		if (this.day() < 10) {
+			return "0" + this.day();
+		} else {
+			return this.day().toString();
+		}
+	},
+	month : function () {
+		return (new Date()).getMonth() + 1;
+	},
+	monthPadded : function () {
+		if (this.month() < 10) {
+			return "0" + this.month();
+		} else {
+			return this.month().toString();
+		}
+	},
+	year : function () {
+		return (new Date()).getFullYear();
+	},
+	dayName : function () {
+		return ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][(new Date()).getDay()];
+	},
+	monthName : function () {
+		return ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"][(new Date()).getMonth()];
+	},
+	isLeap : function () {
+		return (new Date()).getFullYear() % 4 === 0;
+	},
+	millis : function () {
+		return (new Date()).getMilliseconds();
+	},
+	millisPadded : function () {
+		if (this.millis() < 10) {
+			return "000" + this.millis();
+		} else if (this.millis() < 100) {
+			return "00" + this.millis();
+		} else if (this.millis() < 1000) {
+			return "0" + this.millis();
+		} else {
+			return this.millis().toString();
+		}
+	},
+	seconds : function () {
+		return (new Date()).getSeconds();
+	},
+	secondsPadded : function () {
+		if (this.seconds() < 10) {
+			return "0" + this.seconds();
+		} else {
+			return this.seconds().toString();
+		}
+	},
+	minutes : function () {
+		return (new Date()).getMinutes();
+	},
+	minutesPadded : function () {
+		if (this.minutes() < 10) {
+			return "0" + this.minutes();
+		} else {
+			return this.minutes().toString();
+		}
+	},
+	hours : function () {
+		return (new Date()).getHours() % 12;
+	},
+	hoursPadded : function () {
+		if (this.hours() < 10) {
+			return "0" + this.hours();
+		} else {
+			return this.hours().toString();
+		}
+	},
+
+	// TECHNICAL STUFF
+	ods : function (object, key, depthLimit=16) {
+		// Object-Deep-Search-(Query)
+
+		var depth = 0;
+		function recur (object, key) {
+			depth++;
+			if (depth > depthLimit) {
+				return undefined;
+			}
+			var keys = Object.keys(object);
+			var l = keys.length;
+			for (var i = 0; i < l; i++) {
+				if (keys[i] !== key) {
+					var next = recur(
+						object[keys[i]], 
+						key
+					);
+					if (next !== undefined) {
+						return next;
+					}
+				} else {
+					return object[
+						keys[i]
+					];
+				}
+			}
+			return undefined;
+		}
+
+		var result = recur(object, key);
+		return result;
+	},
+	odsPath : function (object, key, depthLimit=16) {
+		// Object-Deep-Search-(Query)-PATH
+
+		var depth = 0;
+		var address = [];
+		function recur (object, key) {
+			depth++;
+			if (depth > depthLimit) {
+				return undefined;
+			}
+			var keys = Object.keys(object);
+			var l = keys.length;
+			for (var i = 0; i < l; i++) {
+				if (keys[i] !== key) {
+					var next = recur(
+						object[keys[i]], 
+						key
+					);
+					address.unshift(keys[i]);
+					if (next !== undefined) {
+						return next;
+					} else {
+						address.pop();
+					}
+
+				} else {
+					address.push(keys[i]);
+					return address;
+				}
+			}
+			return undefined;
+		}
+
+		var result = recur(object, key);
+		return result;
+	},
+	odsPathUse : function (object, path) {
+		var FailKey = "";
+		var l = path.length;
+		for (var i = 0; i < l; i++) {
+			object = object[path[i]];
+			if (object === undefined) {
+				FailKey = path[i];
+			}
+		}
+		return object;
 	}
+};
 
 var Canvas = (function () {
   var obj = function () {
