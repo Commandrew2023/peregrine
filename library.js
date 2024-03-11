@@ -851,8 +851,11 @@ var Peregrine = {
 		    Peregrine.Program.__keyRelease = callback;
 		}
 	    },
-	    "__addEvents" : function () {
+	    "__addEvents" : function (gel=false) {
 		var el = document.getElementById("render");
+		if (gel !== false) {
+			el = gel;
+		}
 		var context = Peregrine.Program;
 		el.addEventListener("mousedown", function (e) {
 		    context.mouse.button = e.button;
