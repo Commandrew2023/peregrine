@@ -1,7 +1,7 @@
-const Peregrine = {
+var Peregrine = {
 	Tools : {
 	    // ANIMATION-ORIENTATED
-	    constrain : function (v, min, max) {
+	    varrain : function (v, min, max) {
 		if (v < min) {
 		    v = min;
 		} else if (v > max) {
@@ -282,7 +282,7 @@ const Peregrine = {
 		return strings[matches.indexOf(Math.max.apply(null, matches))];
 	    },
 	    objectDefaults : function (object, defaultPackage) {
-		Object.keys(defaultPackage).forEach((key) => {
+		Object.keys(defaultPackage).forEach(function (key) {
 		    if (object[key] === undefined) {
 			object[key] = defaultPackage[key];
 		    }
@@ -384,7 +384,7 @@ const Peregrine = {
 		    if (!this.__eventListenerApplied) {
 			this.__eventListenerApplied = true;
 			logBar.addEventListener("keydown", function (e) {
-			    const p = window.Import("graphics/peregrine");
+			    var p = window.Import("graphics/peregrine");
 			    //alert(`${e.key} & ${Peregrine.Log.__prompting}`);
 			    if (e.key === "Enter" && p.Log.__prompting) {
 				var asyncInput = p.Log.__inputBuffer.slice(-1)[0];
@@ -465,9 +465,9 @@ const Peregrine = {
 		closeButton.style.background = "rgba(150, 150, 150, 0.7)";
 		});
 	
-		const context = this;
+		var context = this;
 		window.callback = function () {
-		    const p = window.Import("graphics/peregrine");
+		    var p = window.Import("graphics/peregrine");
 		    var logBar = document.getElementById("logBar");
 		    logBar.innerHTML = "";
 		    p.Log.__logBuffer = [];
@@ -656,7 +656,7 @@ const Peregrine = {
 		}
 	    },
 	    createImage : function (url) {
-		const img = new Image();
+		var img = new Image();
 		img.src = url;
 		return img;
 	    },
@@ -788,19 +788,19 @@ const Peregrine = {
 	    },
 	    "handleFrames" : function () {
 		var parent = this;
-		const p = Peregrine.Graphics;
+		var p = Peregrine.Graphics;
 		var targetInterval = 1000 / this.__targetFrameRate;
 		var currentInterval = targetInterval;
 		function run () {
-		    const t1 = new Date();
-		    const before = performance.now();//t1.getMilliseconds();
+		    var t1 = new Date();
+		    var before = performance.now();//t1.getMilliseconds();
 		    p.draw();
 		    parent.frameCount++;
-		    const t2 = new Date();
-		    const after = performance.now();//t2.getMilliseconds();
+		    var t2 = new Date();
+		    var after = performance.now();//t2.getMilliseconds();
 		    var delay = (after - before);
 		    parent.__frameRate = Math.round(delay) + ", \n" + Math.round(currentInterval) + ", \n" + Math.round(1000 / (currentInterval + delay));
-		    currentInterval = Peregrine.Tools.constrain(targetInterval - delay, 0, Infinity);
+		    currentInterval = Peregrine.Tools.varrain(targetInterval - delay, 0, Infinity);
 		    if (parent.frameCount % 60 === 0) {
 			//console.log(currentInterval);
 		    }
