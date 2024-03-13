@@ -1,4 +1,10 @@
 var Peregrine = {
+
+
+
+	/// THIS IS A SIZEABLE CHANGE THAT JSDELIVR WILL PICK UP AND THEN USE
+
+	
 	Tools : {
 	    // ANIMATION-ORIENTATED
 	    varrain : function (v, min, max) {
@@ -57,7 +63,6 @@ var Peregrine = {
 		}
 		return total;
 	    },
-	
 	    // HANDLING FLOATING POINTS
 	    floor : function (v) {
 		return Math.floor(v);
