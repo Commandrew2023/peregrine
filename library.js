@@ -861,7 +861,7 @@ var Peregrine = {
 		    var after = performance.now();//t2.getMilliseconds();
 		    var delay = (after - before);
 		    parent.__frameRate = Math.round(delay) + ", \n" + Math.round(currentInterval) + ", \n" + Math.round(1000 / (currentInterval + delay));
-		    currentInterval = Peregrine.Tools.varrain(targetInterval - delay, 0, Infinity);
+		    currentInterval = Peregrine.Tools.constrain(targetInterval - delay, 0, Infinity);
 		    if (parent.frameCount % 60 === 0) {
 			//console.log(currentInterval);
 		    }
