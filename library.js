@@ -577,6 +577,13 @@ var Peregrine = {
 		this.noStroke();
 		this.rect(0, 0, this.canvas.width, this.canvas.height);
 	    },
+	    line : function (x1, y1, x2, y2) {
+		this.ctx.beginPath();
+		this.ctx.moveTo(x1, y1);
+		this.ctx.lineTo(x2, y2);
+		this.ctx.closePath();
+		this.ctx.stroke();
+	    },
 	    rect : function (x, y, w, h, r = [0, 0, 0, 0]) {
 		if (this.hints) {
 		    if (x === undefined) {
@@ -597,13 +604,13 @@ var Peregrine = {
 	    ellipse : function (x, y, w, h) {
 		if (this.hints) {
 		    if (x === undefined) {
-			console.log("Missing 'x' value for ellipse");
+			throw new Error("Missing 'x' value for ellipse");
 		    } else if (y === undefined) {
-			console.log("Missing 'y' value for ellipse");
+			throw new Error("Missing 'y' value for ellipse");
 		    } else if (w === undefined) {
-			console.log("Missing 'width' value for ellipse");
+			throw new Error("Missing 'width' value for ellipse");
 		    } else if (h === undefined) {
-			console.log("Missing 'height' value for ellipse");
+			throw new Error("Missing 'height' value for ellipse");
 		    }
 		}
 		this.ctx.beginPath();
@@ -612,23 +619,72 @@ var Peregrine = {
 		this.ctx.stroke();
 	    },
 	    triangle : function (x1, y1, x2, y2, x3, y3) {
-		this.ctx.beginPath();
-		this.ctx.moveTo(x1, y1);
-		this.ctx.lineTo(x2, y2);
-		this.ctx.lineTo(x3, y3);
-		this.ctx.closePath();
-		this.ctx.stroke();
-		this.ctx.fill();
+	    	if (!arguments.map(function (v) {
+			if (typeof v !== "number" || v === undefined) {
+				return false;
+			} else {
+				return true;
+			}
+		}).includes(false)) {
+			this.ctx.beginPath();
+			this.ctx.moveTo(x1, y1);
+			this.ctx.lineTo(x2, y2);
+			this.ctx.lineTo(x3, y3);
+			this.ctx.closePath();
+			this.ctx.stroke();
+			this.ctx.fill();
+		} else {
+			throw new Error("Incorrect input format on calling method 'quad' in Peregrine.Graphics");
+		}
 	    },
 	    quad : function (x1, y1, x2, y2, x3, y3, x4, y4) {
-		this.ctx.beginPath();
-		this.ctx.moveTo(x1, y1);
-		this.ctx.lineTo(x2, y2);
-		this.ctx.lineTo(x3, y3);
-		this.ctx.lineTo(x4, y4);
-		this.ctx.closePath();
-		this.ctx.stroke();
-		this.ctx.fill();
+		if (!arguments.map(function (v) {
+			if (typeof v !== "number" || v === undefined) {
+				return false;
+			} else {
+				return true;
+			}
+		}).includes(false)) {
+			this.ctx.beginPath();
+			this.ctx.moveTo(x1, y1);
+			this.ctx.lineTo(x2, y2);
+			this.ctx.lineTo(x3, y3);
+			this.ctx.lineTo(x4, y4);
+			this.ctx.closePath();
+			this.ctx.stroke();
+			this.ctx.fill();
+		} else {
+			throw new Error("Incorrect input format on calling method 'quad' in Peregrine.Graphics");
+		}
+	    },
+	    poly : function (array) {
+		if (array instanceof Array) {
+			this.ctx.beginPath();
+			this.ctx.moveTo(array[0], array[0]);
+			for (var i = 2; i < array.length; i += 2) {
+				this.ctx.lineTo(array[i], array[i + 1]);
+			}
+			this.ctx.closePath();
+			this.ctx.stroke();
+			this.ctx.fill();
+		} else if (!arguments.map(function (v) {
+			if (typeof v !== "number") {
+				return false;
+			} else {
+				return true;
+			}
+		}).includes(false)) {
+			this.ctx.beginPath();
+			this.ctx.moveTo(arguments[0], arguments[0]);
+			for (var i = 2; i < arguments.length; i += 2) {
+				this.ctx.lineTo(arguments[i], arguments[i + 1]);
+			}
+			this.ctx.closePath();
+			this.ctx.stroke();
+			this.ctx.fill();
+		} else {
+			throw new Error("Incorrect input format on calling method 'poly' in Peregrine.Graphics");
+		}
 	    },
 	    arc : function (x, y, w, h, start, end) {
 		this.ctx.beginPath();
