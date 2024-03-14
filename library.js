@@ -7,7 +7,7 @@ var Peregrine = {
 	
 	Tools : {
 	    // ANIMATION-ORIENTATED
-	    varrain : function (v, min, max) {
+	    constrain : function (v, min, max) {
 		if (v < min) {
 		    v = min;
 		} else if (v > max) {
