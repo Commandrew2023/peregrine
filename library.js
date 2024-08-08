@@ -1149,25 +1149,23 @@ var Peregrine = (function () {
 			this.__targetFrameRate = r;
 	    },
 	    "run" : function () {
-			var parent = window.Import("graphics/peregrine");
-			var p = window.Import("graphics/peregrine").Graphics;
 			var targetInterval = 1000 / this.__targetFrameRate;
 			var currentInterval = targetInterval;
 			function run () {
 				var t1 = new Date();
 				var before = performance.now();//t1.getMilliseconds();
-				p.__draw();
-				parent.frameCount++;
+				_Graphics.__draw();
+				_Program.frameCount++;
 				var t2 = new Date();
 				var after = performance.now();//t2.getMilliseconds();
 				var delay = (after - before);
-				parent.__frameRate = Math.round(delay) + ", \n" + Math.round(currentInterval) + ", \n" + Math.round(1000 / (currentInterval + delay));
+				_Program.__frameRate = Math.round(delay) + ", \n" + Math.round(currentInterval) + ", \n" + Math.round(1000 / (currentInterval + delay));
 				currentInterval = parent.Tools.constrain(targetInterval - delay, 0, Infinity);
-				if (parent.frameCount % 60 === 0) {
+				if (_Program.frameCount % 60 === 0) {
 				//console.log(currentInterval);
 				}
 				setTimeout(run, currentInterval - 2);
-				//parent.__frameRate = (1000 / (currentInterval + delay));
+				//_Program.__frameRate = (1000 / (currentInterval + delay));
 			}
 			run();
 	    },
