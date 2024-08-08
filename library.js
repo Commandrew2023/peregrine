@@ -451,26 +451,25 @@ var Peregrine = (function () {
 				if (!this.__eventListenerApplied) {
 					this.__eventListenerApplied = true;
 					logBar.addEventListener("keydown", function (e) {
-						var p = _Graphics;
-						if (e.key === "Enter" && p.Log.__prompting) {
-							var asyncInput = p.Log.__inputBuffer.slice(-1)[0];
+						if (e.key === "Enter" && _Log.__prompting) {
+							var asyncInput = _Log.__inputBuffer.slice(-1)[0];
 							var el = document.getElementById("currentInput");
 							asyncInput.response = el.value;
 							asyncInput.callback(asyncInput.response);
 							var logBar = document.getElementById("logBar");
 							logBar.removeChild(el);
 							logBar.innerHTML += asyncInput.response + "<br>";
-							p.Log.__prompting = false;
-							p.Log.__inputBuffer.pop();
-							for (var i = 0; i < p.Log.__asyncBuffer.length; i++) {
-								var v = p.Log.__asyncBuffer[i];
+							_Log.__prompting = false;
+							_Log.__inputBuffer.pop();
+							for (var i = 0; i < _Log.__asyncBuffer.length; i++) {
+								var v = _Log.__asyncBuffer[i];
 								if (v.type === "log") {
-									p.Log.print(v.string);
-									p.Log.__asyncBuffer.shift();
+									_Log.print(v.string);
+									_Log.__asyncBuffer.shift();
 									i--;
 								} else if (v.type === "input") {
-									p.Log.input(v.string, v.callback);
-									p.Log.__asyncBuffer.shift();
+									_Log.input(v.string, v.callback);
+									_Log.__asyncBuffer.shift();
 									break;
 								}
 							}
