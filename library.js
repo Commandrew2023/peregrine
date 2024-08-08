@@ -532,13 +532,12 @@ var Peregrine = (function () {
 		
 			var context = this;
 			window.callback = function () {
-				var p = window.Import("graphics/peregrine");
 				var logBar = document.getElementById("logBar");
 				logBar.innerHTML = "";
-				p.Log.__logBuffer = [];
-				p.Log.__shown = false;
-				p.Log.__prompting = false;
-				p.Log.__asyncBuffer = [];
+				_Log.__logBuffer = [];
+				_Log.__shown = false;
+				_Log.__prompting = false;
+				_Log.__asyncBuffer = [];
 				logBar.style.display = "none";
 				document.getElementById("closeButton").style.display = "none";
 			};
