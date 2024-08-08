@@ -1144,7 +1144,7 @@ var Peregrine = (function () {
 	    },
 	    "frameRate" : function (r) {
 			if (!r) {
-				throw new ReferenceError("[function:Peregrine.Program.frameRate|debug:01] Function 'frameRate' requires at least 1 callback argument");
+				throw new ReferenceError("[function:Peregrine.Program.frameRate|debug:01] Function 'frameRate' requires at least 1 value argument");
 			}
 			this.__targetFrameRate = r;
 	    },
@@ -1160,7 +1160,7 @@ var Peregrine = (function () {
 				var after = performance.now();//t2.getMilliseconds();
 				var delay = (after - before);
 				_Program.__frameRate = Math.round(delay) + ", \n" + Math.round(currentInterval) + ", \n" + Math.round(1000 / (currentInterval + delay));
-				currentInterval = parent.Tools.constrain(targetInterval - delay, 0, Infinity);
+				currentInterval = _Math.constrain(targetInterval - delay, 0, Infinity);
 				if (_Program.frameCount % 60 === 0) {
 				//console.log(currentInterval);
 				}
