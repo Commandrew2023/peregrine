@@ -1044,43 +1044,43 @@ var Peregrine = (function () {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.mouseReleased|debug:01] Function 'mouseReleased' requires at least 1 callback argument");
 			}
-			_Event.Program.__mouseRelease = callback;
+			_Event.__mouseRelease = callback;
 		},
 		"mouseMove" : function (callback) {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.mouseMove|debug:01] Function 'mouseMove' requires at least 1 callback argument");
 			}
-			_Event.Program.__mouseMove = callback;
+			_Event.__mouseMove = callback;
 		},
 		"mouseOut" : function (callback) {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.mouseOut|debug:01] Function 'mouseOut' requires at least 1 callback argument");
 			}
-			_Event.Program.__mouseOut = callback;
+			_Event.__mouseOut = callback;
 		},
 		"mouseEnter" : function (callback) {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.mouseEnter|debug:01] Function 'mouseEnter' requires at least 1 callback argument");
 			}
-			_Event.Program.__mouseEnter = callback;
+			_Event.__mouseEnter = callback;
 		},
 		"mouseDoubleClick" : function (callback) {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.mouseDoubleClick|debug:01] Function 'mouseDoubleClick' requires at least 1 callback argument");
 			}
-			_Event.Program.__mouseDoubleClick = callback;
+			_Event.__mouseDoubleClick = callback;
 		},
 		"keyPressed" : function (callback) {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.keyPressed|debug:01] Function 'keyPressed' requires at least 1 callback argument");
 			}
-			_Event.Program.__keyPress = callback;
+			_Event.__keyPress = callback;
 		},
 		"keyReleased" : function (callback) {
 			if (!callback) {
 				throw new ReferenceError("[function:Peregrine.Event.keyReleased|debug:01] Function 'keyReleased' requires at least 1 callback argument");
 			}
-			_Event.Program.__keyRelease = callback;
+			_Event.__keyRelease = callback;
 		},
 		"__addEvents" : function () {
 			var el = document.getElementById("render");
