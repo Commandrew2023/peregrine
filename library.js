@@ -451,7 +451,7 @@ var Peregrine = (function () {
 				if (!this.__eventListenerApplied) {
 					this.__eventListenerApplied = true;
 					logBar.addEventListener("keydown", function (e) {
-						var p = window.Import("graphics/peregrine");
+						var p = _Graphics;
 						if (e.key === "Enter" && p.Log.__prompting) {
 							var asyncInput = p.Log.__inputBuffer.slice(-1)[0];
 							var el = document.getElementById("currentInput");
